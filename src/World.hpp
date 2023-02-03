@@ -37,6 +37,9 @@ public:
     void update(float dt) noexcept;
 
     void render(sf::RenderTarget& target) const noexcept;
+
+    void setPause() noexcept;
+    
 private:
     bool generate_logs;
 
@@ -54,4 +57,6 @@ private:
 
     float logs_spawn_timer{0.f};
     float last_log_y{0.f};
+
+    bool pause{false};
 };

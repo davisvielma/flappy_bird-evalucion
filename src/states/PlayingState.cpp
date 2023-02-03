@@ -22,7 +22,6 @@ PlayingState::PlayingState(StateMachine* sm) noexcept
 void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bird) noexcept
 {
     world = _world;
-    world->reset(true);
     
     if (_bird == nullptr)
     {
@@ -30,6 +29,8 @@ void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _b
             Settings::VIRTUAL_WIDTH / 2 - Settings::BIRD_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 2 - Settings::BIRD_HEIGHT / 2,
             Settings::BIRD_WIDTH, Settings::BIRD_HEIGHT
         );
+        
+        world->reset(true);
     }
     else
     {
@@ -43,6 +44,12 @@ void PlayingState::handle_inputs(const sf::Event& event) noexcept
     {
         bird->jump();
     }
+
+    if (event.key.code == sf::Keyboard::P) {
+        world->setPause();
+        state_machine->change_state("pause", world, bird);
+    }
+
 }
 
 void PlayingState::update(float dt) noexcept

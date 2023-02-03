@@ -10,8 +10,8 @@
 
 #include <Settings.hpp>
 #include <src/text_utilities.hpp>
-#include <src/states/CountDownState.hpp>
 #include <src/states/StateMachine.hpp>
+#include <src/states/CountDownState.hpp>
 
 CountDownState::CountDownState(StateMachine* sm) noexcept
     : BaseState{sm}
