@@ -30,20 +30,6 @@ void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<BaseBird
     }
     
     bird = _bird;
-
-    /*if (_bird == nullptr)
-    {
-        bird = std::make_shared<Bird>(
-            Settings::VIRTUAL_WIDTH / 2 - Settings::BIRD_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 2 - Settings::BIRD_HEIGHT / 2,
-            Settings::BIRD_WIDTH, Settings::BIRD_HEIGHT
-        );
-        
-        world->reset(true);
-    }
-    else
-    {
-        bird = _bird;
-    }*/
 }
 
 void PlayingState::handle_inputs(const sf::Event& event) noexcept
@@ -53,11 +39,20 @@ void PlayingState::handle_inputs(const sf::Event& event) noexcept
         bird->jump();
     }
 
-    if (event.key.code == sf::Keyboard::P) {
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
         world->setPause();
         state_machine->change_state("pause", world, bird);
     }
 
+    if(bird->get_move_x() && event.type == sf::Event::KeyPressed) {
+        if(event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A) {
+            bird->speed_in_x(-Settings::BIRD_SPEED);
+        } else if(event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D) {
+            bird->speed_in_x(Settings::BIRD_SPEED);
+        } else {
+            bird->speed_in_x(0.f);
+        }
+    }
 }
 
 void PlayingState::update(float dt) noexcept
@@ -69,7 +64,8 @@ void PlayingState::update(float dt) noexcept
     {
         Settings::sounds["explosion"].play();
         Settings::sounds["hurt"].play();
-        state_machine->change_state("count_down");
+        bird->reset();
+        state_machine->change_state("count_down", nullptr, bird);
     }
 
     if (world->update_scored(bird->get_collision_rect()))

@@ -13,8 +13,6 @@
 #include <src/states/StateMachine.hpp>
 #include <src/states/CountDownState.hpp>
 
-#include <iostream>
-
 CountDownState::CountDownState(StateMachine* sm) noexcept
     : BaseState{sm}
 {

@@ -14,7 +14,6 @@
 #include <src/states/BaseState.hpp>
 #include <src/bird/BirdMachine.hpp>
 
-
 class TitleScreenState : public BaseState
 {
 public:

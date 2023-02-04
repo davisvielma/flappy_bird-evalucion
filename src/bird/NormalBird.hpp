@@ -8,4 +8,5 @@ class NormalBird : public BaseBird {
 
 	 	void update(float dt) noexcept override;
 		void render(sf::RenderTarget& target) const noexcept override;
+		void reset() noexcept override;
 };

@@ -14,7 +14,6 @@ void PauseState::enter(std::shared_ptr<World> _world, std::shared_ptr<BaseBird> 
 
 void PauseState::handle_inputs(const sf::Event& event) noexcept {
     if (event.key.code == sf::Keyboard::P) {
-    	/*world->setPause();*/
         state_machine->change_state("playing", world, bird);
     }
 }

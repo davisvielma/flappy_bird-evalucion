@@ -13,6 +13,7 @@
 #include <src/states/StateMachine.hpp>
 #include <src/states/TitleScreenState.hpp>
 #include <src/bird/NormalBird.hpp>
+#include <src/bird/HardBird.hpp>
 
 #include <iostream>
 
@@ -45,6 +46,16 @@ void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
             };
             
             bird_machine.setBird(normalBird);
+        } else {
+            std::shared_ptr<HardBird> hardlBird {
+                std::make_shared<HardBird>(
+                    Settings::VIRTUAL_WIDTH / 2 - Settings::BIRD_WIDTH / 2, 
+                    Settings::VIRTUAL_HEIGHT / 2 - Settings::BIRD_HEIGHT / 2,
+                    Settings::BIRD_WIDTH, Settings::BIRD_HEIGHT
+                )
+            };
+            
+            bird_machine.setBird(hardlBird);
         }
 
         state_machine->change_state("count_down", nullptr, bird_machine.get_base_bird());

@@ -8,23 +8,6 @@ BirdMachine::BirdMachine(std::shared_ptr<BaseBird> base) noexcept :
 
 }
 
-/*void BirdMachine::change_bird(const std::string& bird_name) noexcept {
-	auto it = birds.find(bird_name);
-
-    if (it == birds.end())
-    {
-        return;
-    }
-
-    float x = Settings::VIRTUAL_WIDTH / 2 - Settings::BIRD_WIDTH / 2; 
-    float y = Settings::VIRTUAL_HEIGHT / 2 - Settings::BIRD_HEIGHT / 2,
-
-    current_bird = it->second(this, x, y, Settings::BIRD_WIDTH, Settings::BIRD_HEIGHT);
-
-    return current_bird;
-}*/
-
-
 sf::FloatRect BirdMachine::get_collision_rect() const noexcept {
 	return base_bird->get_collision_rect();
 }

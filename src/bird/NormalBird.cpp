@@ -1,8 +1,7 @@
 #include <src/bird/NormalBird.hpp>
 #include <Settings.hpp>
-#include <iostream>
 
-NormalBird::NormalBird(float _x, float _y, float w, float h) noexcept : BaseBird {_x, _y, w, h} {
+NormalBird::NormalBird(float _x, float _y, float w, float h) noexcept : BaseBird {_x, _y, w, h, false} {
     
 }
 
@@ -22,4 +21,10 @@ void NormalBird::update(float dt) noexcept {
 
 void NormalBird::render(sf::RenderTarget& target) const noexcept {
 	target.draw(sprite);
+}
+
+void NormalBird::reset() noexcept {
+    x = ((Settings::VIRTUAL_WIDTH / 2) - (Settings::BIRD_WIDTH / 2));
+    y = ((Settings::VIRTUAL_HEIGHT / 2) - (Settings::BIRD_HEIGHT / 2));
+    vy = 0;
 }
