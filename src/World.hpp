@@ -39,6 +39,7 @@ public:
     void render(sf::RenderTarget& target) const noexcept;
 
     void setPause() noexcept;
+    inline bool getPause() const { return pause; }
     
 private:
     bool generate_logs;

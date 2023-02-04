@@ -19,11 +19,19 @@ PlayingState::PlayingState(StateMachine* sm) noexcept
 
 }
 
-void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bird) noexcept
+void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<BaseBird> _bird) noexcept
 {
     world = _world;
+
+    if(world->getPause()) {
+        world->setPause();
+    } else {
+        world->reset(true);
+    }
     
-    if (_bird == nullptr)
+    bird = _bird;
+
+    /*if (_bird == nullptr)
     {
         bird = std::make_shared<Bird>(
             Settings::VIRTUAL_WIDTH / 2 - Settings::BIRD_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 2 - Settings::BIRD_HEIGHT / 2,
@@ -35,7 +43,7 @@ void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _b
     else
     {
         bird = _bird;
-    }
+    }*/
 }
 
 void PlayingState::handle_inputs(const sf::Event& event) noexcept

@@ -16,7 +16,7 @@
 
 class StateMachine;
 class World;
-class Bird;
+class BaseBird;
 
 class BaseState
 {
@@ -25,7 +25,7 @@ public:
 
     virtual ~BaseState() {}
 
-    virtual void enter(std::shared_ptr<World> world, std::shared_ptr<Bird> bird) noexcept {}
+    virtual void enter(std::shared_ptr<World> world, std::shared_ptr<BaseBird> bird) noexcept {}
 
     virtual void exit() noexcept {}
 

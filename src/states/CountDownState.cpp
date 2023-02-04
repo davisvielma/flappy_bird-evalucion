@@ -13,15 +13,18 @@
 #include <src/states/StateMachine.hpp>
 #include <src/states/CountDownState.hpp>
 
+#include <iostream>
+
 CountDownState::CountDownState(StateMachine* sm) noexcept
     : BaseState{sm}
 {
 
 }
 
-void CountDownState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bird) noexcept
+void CountDownState::enter(std::shared_ptr<World> _world, std::shared_ptr<BaseBird> _bird) noexcept
 {
     world = std::make_shared<World>(false);
+    bird = _bird;
 }
 
 void CountDownState::update(float dt) noexcept
@@ -35,7 +38,7 @@ void CountDownState::update(float dt) noexcept
 
         if (counter == 0)
         {
-            state_machine->change_state("playing", world);
+            state_machine->change_state("playing", world, bird);
         }
     }
 

@@ -12,8 +12,10 @@
 
 #include <src/World.hpp>
 #include <src/states/BaseState.hpp>
+#include <src/bird/BirdMachine.hpp>
 
-class TitleScreenState: public BaseState
+
+class TitleScreenState : public BaseState
 {
 public:
     TitleScreenState(StateMachine* sm) noexcept;
@@ -26,5 +28,6 @@ public:
 
 private:
     World world;
+    BirdMachine bird_machine;
     bool option{false};
 };

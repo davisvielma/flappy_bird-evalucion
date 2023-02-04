@@ -7,14 +7,14 @@ PauseState::PauseState(StateMachine* sm) noexcept : BaseState{sm} {
 
 }
 
-void PauseState::enter(std::shared_ptr<World> _world, std::shared_ptr<Bird> _bird) noexcept {
+void PauseState::enter(std::shared_ptr<World> _world, std::shared_ptr<BaseBird> _bird) noexcept {
 	world = _world;
 	bird = _bird;
 }
 
 void PauseState::handle_inputs(const sf::Event& event) noexcept {
     if (event.key.code == sf::Keyboard::P) {
-    	world->setPause();
+    	/*world->setPause();*/
         state_machine->change_state("playing", world, bird);
     }
 }

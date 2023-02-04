@@ -12,11 +12,14 @@
 #include <src/text_utilities.hpp>
 #include <src/states/StateMachine.hpp>
 #include <src/states/TitleScreenState.hpp>
+#include <src/bird/NormalBird.hpp>
+
+#include <iostream>
 
 TitleScreenState::TitleScreenState(StateMachine* sm) noexcept
-    : BaseState{sm}, world{}
+    : BaseState{sm}, world{ }
 {
-
+ 
 }
 
 void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
@@ -31,7 +34,20 @@ void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
 
     if (event.key.code == sf::Keyboard::Enter)
     {
-        state_machine->change_state("count_down");
+
+        if(!option) {
+            std::shared_ptr<NormalBird> normalBird {
+                std::make_shared<NormalBird>(
+                    Settings::VIRTUAL_WIDTH / 2 - Settings::BIRD_WIDTH / 2, 
+                    Settings::VIRTUAL_HEIGHT / 2 - Settings::BIRD_HEIGHT / 2,
+                    Settings::BIRD_WIDTH, Settings::BIRD_HEIGHT
+                )
+            };
+            
+            bird_machine.setBird(normalBird);
+        }
+
+        state_machine->change_state("count_down", nullptr, bird_machine.get_base_bird());
     }
 }
 

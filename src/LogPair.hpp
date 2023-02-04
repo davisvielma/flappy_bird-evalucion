@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include <src/Bird.hpp>
+//#include <src/bird/Bird.hpp>
 #include <src/Log.hpp>
 
 class LogPair
