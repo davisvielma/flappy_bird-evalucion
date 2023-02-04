@@ -26,4 +26,5 @@ public:
 
 private:
     World world;
+    bool option{false};
 };

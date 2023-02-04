@@ -34,5 +34,5 @@ public:
 
 private:
     std::unordered_map<std::string, StateBuilder> states;
-    std::shared_ptr<BaseState> current_state{std::make_shared<BaseState>(this)};
+    std::shared_ptr<BaseState> current_state{std::make_shared<BaseState>(this)}; 
 };
