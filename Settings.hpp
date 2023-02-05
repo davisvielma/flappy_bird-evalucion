@@ -32,10 +32,11 @@ struct Settings
     static constexpr int VIRTUAL_HEIGHT{255};
     static constexpr float BIRD_WIDTH{39.f};
     static constexpr float BIRD_HEIGHT{28.f};
-    static constexpr float BIRD_SPEED{200.f};
+    static constexpr float BIRD_SPEED{700.f};
     static constexpr float LOG_WIDTH{70.f};
-    static constexpr float LOG_HEIGHT{288.f};
+    static constexpr float LOG_HEIGHT{255.f};
     static constexpr float LOGS_GAP{90.f};
+    static constexpr float LOGS_SPEED{25.f};
     static constexpr float GROUND_HEIGHT{16.f};
     static constexpr float BACKGROUND_LOOPING_POINT{1024.f};
     static constexpr float MAIN_SCROLL_SPEED{100.f};

@@ -12,7 +12,8 @@
 #include <src/Log.hpp>
 
 Log::Log(float _x, float _y, bool _inverted) noexcept
-    : x{_x}, y{_y}, inverted{_inverted}, sprite{Settings::textures["Log"]}
+    : x{_x}, y{_y}, inverted{_inverted}, sprite{Settings::textures["Log"]},
+    /*x_original{_x},*/ y_original{_y}
 {
     if (inverted)
     {
@@ -30,7 +31,7 @@ sf::FloatRect Log::get_collision_rect() const noexcept
     return sf::FloatRect{x - Settings::LOG_WIDTH, y - Settings::LOG_HEIGHT, Settings::LOG_WIDTH, Settings::LOG_HEIGHT};
 }
 
-void Log::update(float _x) noexcept
+void Log::update_x(float _x) noexcept
 {
     x = _x;
 
@@ -45,4 +46,38 @@ void Log::update(float _x) noexcept
 void Log::render(sf::RenderTarget& target) const noexcept
 {
     target.draw(sprite);
+}
+
+void Log::update_y(float speed/*, float stop*/) noexcept {
+    if((approaching && inverted) || (!approaching && !inverted)) {
+        y += speed;
+    } else{
+        y -= speed;
+    }
+
+    float collision = Settings::LOGS_GAP / 2;
+
+    if(inverted) {
+        if(y >= (y_original + collision)) {
+            approaching = false;
+            y = y_original + collision;
+        } 
+
+        if(y <= y_original) {
+            approaching = true;
+            y = y_original;
+        }
+    } else {
+        if(y <= (y_original - collision)) {
+            approaching = false;
+            y = y_original - collision;
+        } 
+
+        if(y >= y_original) {
+            approaching = true;
+            y = y_original;
+        }
+    }
+
+    sprite.setPosition(x, y);
 }

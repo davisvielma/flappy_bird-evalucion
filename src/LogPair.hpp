@@ -10,13 +10,12 @@
 
 #pragma once
 
-//#include <src/bird/Bird.hpp>
 #include <src/Log.hpp>
 
 class LogPair
 {
 public:
-    LogPair(float _x, float _y) noexcept;
+    LogPair(float _x, float _y, bool _move = false) noexcept;
 
     bool collides(const sf::FloatRect& rect) const noexcept;
 
@@ -30,11 +29,13 @@ public:
 
     void reset(float _x, float _y) noexcept;
 
+    void setMove() noexcept;
+
 private:
     float x;
     float y;
     Log top;
     Log bottom;
-
     bool scored{false};
+    bool move;
 };

@@ -34,10 +34,11 @@ class BaseWorld {
 		BaseWorld(bool _generate_logs = false);
 		virtual ~BaseWorld() { }
 	
-		void reset(bool _generate_logs) noexcept;
 	    bool collides(const sf::FloatRect& rect) const noexcept;
 	    bool update_scored(const sf::FloatRect& rect) noexcept;
 	    void setPause() noexcept;
+		void reset(bool _generate_logs) noexcept;
+
 	    inline bool getPause() const { return pause; }
 
 	    virtual void update(float dt) noexcept = 0;

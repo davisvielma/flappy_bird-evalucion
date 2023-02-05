@@ -15,7 +15,7 @@
 #include <src/bird/NormalBird.hpp>
 #include <src/bird/HardBird.hpp>
 #include <src/world/NormalWorld.hpp>
-//#include <src/world/HardWorld.hpp>
+#include <src/world/HardWorld.hpp>
 
 #include <iostream>
 
@@ -64,6 +64,12 @@ void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
             };
             
             bird_machine.setBird(hardlBird);
+
+            std::shared_ptr<HardWorld> hardlWorld {
+                std::make_shared<HardWorld>(false)  
+            };
+
+            world_machine.setWorld(hardlWorld);
         }
 
         state_machine->change_state("count_down", world_machine.get_base_world(), bird_machine.get_base_bird());

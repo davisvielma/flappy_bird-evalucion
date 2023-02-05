@@ -2,9 +2,12 @@
 
 #include <src/world/BaseWorld.hpp>
 
-class NormalWorld : public BaseWorld {
+class HardWorld: public BaseWorld {
+	private:
+		int count{0};
+
 	public:
-		NormalWorld(bool _generate_logs = false) noexcept;
+		HardWorld(bool _generate_logs = false) noexcept;
 		
 		void update(float dt) noexcept override;
 	    void render(sf::RenderTarget& target) const noexcept override;

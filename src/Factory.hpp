@@ -22,6 +22,7 @@ public:
             buffer.pop_back();
             return object;
         }
+
         return std::make_shared<T>(float(x), float(y), args...);
     }
 

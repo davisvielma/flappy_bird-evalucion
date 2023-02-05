@@ -20,7 +20,6 @@ void BaseWorld::reset(bool _generate_logs) noexcept
         log_factory.remove(log_pair);
         it = logs.erase(it);           
     }
-    
 }
 
 bool BaseWorld::collides(const sf::FloatRect& rect) const noexcept

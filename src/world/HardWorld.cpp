@@ -1,11 +1,11 @@
-#include <src/world/NormalWorld.hpp>
+#include <src/world/HardWorld.hpp>
 #include <Settings.hpp>
 
-NormalWorld::NormalWorld(bool _generate_logs) noexcept : BaseWorld{_generate_logs} {
+HardWorld::HardWorld(bool _generate_logs) noexcept : BaseWorld{_generate_logs} {
 
 }
 		
-void NormalWorld::update(float dt) noexcept {
+void HardWorld::update(float dt) noexcept {
 	if(!pause){
         if (generate_logs)
         {
@@ -19,8 +19,16 @@ void NormalWorld::update(float dt) noexcept {
                 float y = std::max(-Settings::LOG_HEIGHT + 10, std::min(last_log_y + dist(rng), Settings::VIRTUAL_HEIGHT + 90 - Settings::LOG_HEIGHT));
         
                 last_log_y = y;
+
+                bool move = false;
+
+                if(count % 2 != 0) {
+                    move = true;
+                }
+
+                count++;
         
-                logs.push_back(log_factory.create(Settings::VIRTUAL_WIDTH, y));
+                logs.push_back(log_factory.create(Settings::VIRTUAL_WIDTH, y, move));
             }
         }
         
@@ -60,7 +68,7 @@ void NormalWorld::update(float dt) noexcept {
     }
 }
 
-void NormalWorld::render(sf::RenderTarget& target) const noexcept {
+void HardWorld::render(sf::RenderTarget& target) const noexcept {
 	target.draw(background);
 
     for (const auto& log_pair: logs)
