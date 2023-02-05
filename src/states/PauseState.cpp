@@ -7,7 +7,7 @@ PauseState::PauseState(StateMachine* sm) noexcept : BaseState{sm} {
 
 }
 
-void PauseState::enter(std::shared_ptr<World> _world, std::shared_ptr<BaseBird> _bird) noexcept {
+void PauseState::enter(std::shared_ptr<BaseWorld> _world, std::shared_ptr<BaseBird> _bird) noexcept {
 	world = _world;
 	bird = _bird;
 }

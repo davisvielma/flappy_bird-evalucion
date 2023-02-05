@@ -1,64 +1,12 @@
-/*
-    ISPPJ1 2023
-    Study Case: Flappy Bird
-
-    Author: Alejandro Mujica
-    alejandro.j.mujic4@gmail.com
-
-    This file contains the definition of the class World.
-*/
-
+#include <src/world/NormalWorld.hpp>
 #include <Settings.hpp>
-#include <src/World.hpp>
 
-World::World(bool _generate_logs) noexcept
-    : generate_logs{_generate_logs}, background{Settings::textures["background"]}, ground{Settings::textures["ground"]},
-      logs{}, rng{std::default_random_engine{}()}
-{
-    ground.setPosition(0, Settings::VIRTUAL_HEIGHT - Settings::GROUND_HEIGHT);
-    std::uniform_int_distribution<int> dist(0, 80);
-    last_log_y = -Settings::LOG_HEIGHT + dist(rng) + 20;
+NormalWorld::NormalWorld(bool _generate_logs) noexcept : BaseWorld{_generate_logs} {
+
 }
-
-void World::reset(bool _generate_logs) noexcept
-{
-    generate_logs = _generate_logs;
-}
-
-bool World::collides(const sf::FloatRect& rect) const noexcept
-{
-    if (rect.top + rect.height >= Settings::VIRTUAL_HEIGHT || rect.top <= 0)
-    {
-        return true;
-    }
-    
-    for (auto log_pair: logs)
-    {
-        if (log_pair->collides(rect))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-bool World::update_scored(const sf::FloatRect& rect) noexcept
-{
-    for (auto log_pair: logs)
-    {
-        if (log_pair->update_scored(rect))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-void World::update(float dt) noexcept
-{
-    if(!pause){
+		
+void NormalWorld::update(float dt) noexcept {
+	if(!pause){
         if (generate_logs)
         {
             logs_spawn_timer += dt;
@@ -112,9 +60,8 @@ void World::update(float dt) noexcept
     }
 }
 
-void World::render(sf::RenderTarget& target) const noexcept
-{
-    target.draw(background);
+void NormalWorld::render(sf::RenderTarget& target) const noexcept {
+	target.draw(background);
 
     for (const auto& log_pair: logs)
     {
@@ -122,8 +69,4 @@ void World::render(sf::RenderTarget& target) const noexcept
     }
 
     target.draw(ground);
-}
-
-void World::setPause() noexcept {
-    pause = !pause;
 }

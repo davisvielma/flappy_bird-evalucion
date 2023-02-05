@@ -19,7 +19,7 @@ PlayingState::PlayingState(StateMachine* sm) noexcept
 
 }
 
-void PlayingState::enter(std::shared_ptr<World> _world, std::shared_ptr<BaseBird> _bird) noexcept
+void PlayingState::enter(std::shared_ptr<BaseWorld> _world, std::shared_ptr<BaseBird> _bird) noexcept
 {
     world = _world;
 
@@ -65,7 +65,8 @@ void PlayingState::update(float dt) noexcept
         Settings::sounds["explosion"].play();
         Settings::sounds["hurt"].play();
         bird->reset();
-        state_machine->change_state("count_down", nullptr, bird);
+        world->reset(false);
+        state_machine->change_state("count_down", world, bird);
     }
 
     if (world->update_scored(bird->get_collision_rect()))

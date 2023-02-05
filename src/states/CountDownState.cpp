@@ -19,9 +19,9 @@ CountDownState::CountDownState(StateMachine* sm) noexcept
 
 }
 
-void CountDownState::enter(std::shared_ptr<World> _world, std::shared_ptr<BaseBird> _bird) noexcept
+void CountDownState::enter(std::shared_ptr<BaseWorld> _world, std::shared_ptr<BaseBird> _bird) noexcept
 {
-    world = std::make_shared<World>(false);
+    world = _world;
     bird = _bird;
 }
 

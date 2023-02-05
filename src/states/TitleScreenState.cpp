@@ -14,13 +14,21 @@
 #include <src/states/TitleScreenState.hpp>
 #include <src/bird/NormalBird.hpp>
 #include <src/bird/HardBird.hpp>
+#include <src/world/NormalWorld.hpp>
+//#include <src/world/HardWorld.hpp>
 
 #include <iostream>
 
 TitleScreenState::TitleScreenState(StateMachine* sm) noexcept
-    : BaseState{sm}, world{ }
-{
- 
+    : BaseState{sm} {
+
+       std::shared_ptr<NormalWorld> normalWorld {
+            std::make_shared<NormalWorld>(false)  
+        };
+
+        world_machine.setWorld(normalWorld);
+
+        world = world_machine.get_base_world();
 }
 
 void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
@@ -58,18 +66,21 @@ void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
             bird_machine.setBird(hardlBird);
         }
 
-        state_machine->change_state("count_down", nullptr, bird_machine.get_base_bird());
+        state_machine->change_state("count_down", world_machine.get_base_world(), bird_machine.get_base_bird());
     }
 }
 
 void TitleScreenState::update(float dt) noexcept
 {
-    world.update(dt);
+   // std::shared_ptr<BaseWorld> world = world_machine.get_base_world();
+    world->update(dt);
 }
 
 void TitleScreenState::render(sf::RenderTarget& target) const noexcept 
 {
-    world.render(target);
+    //std::shared_ptr<BaseWorld> world = world_machine.get_base_world();
+
+    world->render(target);
     render_text(target, Settings::VIRTUAL_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 3, 
         "Flappy Bird", Settings::FLAPPY_TEXT_SIZE, "flappy", sf::Color::White, true);
     render_text(target, Settings::VIRTUAL_WIDTH / 2, 2 * Settings::VIRTUAL_HEIGHT / 3.5, 

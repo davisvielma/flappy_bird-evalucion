@@ -10,9 +10,9 @@
 
 #pragma once
 
-#include <src/World.hpp>
 #include <src/states/BaseState.hpp>
 #include <src/bird/BirdMachine.hpp>
+#include <src/world/WorldMachine.hpp>
 
 class TitleScreenState : public BaseState
 {
@@ -26,7 +26,8 @@ public:
     void render(sf::RenderTarget& target) const noexcept override;
 
 private:
-    World world;
+    WorldMachine world_machine;
+    std::shared_ptr<BaseWorld> world;
     BirdMachine bird_machine;
     bool option{false};
 };

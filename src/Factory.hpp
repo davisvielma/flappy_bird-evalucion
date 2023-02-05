@@ -4,8 +4,6 @@
 #include <memory>
 #include <type_traits>
 
-#include <iostream>
-
 template <class T>
 class Factory
 {

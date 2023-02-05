@@ -1,8 +1,6 @@
 #include <src/bird/BirdMachine.hpp>
 #include <Settings.hpp>
 
-#include <iostream>
-
 BirdMachine::BirdMachine(std::shared_ptr<BaseBird> base) noexcept : 
 	base_bird{base} {
 
