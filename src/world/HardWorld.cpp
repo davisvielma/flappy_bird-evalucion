@@ -1,5 +1,6 @@
 #include <src/world/HardWorld.hpp>
 #include <Settings.hpp>
+#include <iostream>
 
 HardWorld::HardWorld(bool _generate_logs) noexcept : BaseWorld{_generate_logs} {
 
@@ -9,10 +10,17 @@ void HardWorld::update(float dt) noexcept {
 	if(!pause){
         if (generate_logs)
         {
+
+            std::uniform_real_distribution<float> timer{1.4, 2.0};
             logs_spawn_timer += dt;
+
+            //float prueba = timer(rng) * 1.14;
         
-            if (logs_spawn_timer >= Settings::TIME_TO_SPAWN_LOGS)
+            if (logs_spawn_timer >= (timer(rng) * 1.14) /*Settings::TIME_TO_SPAWN_LOGS*/)
             {
+                /*std::cout << "el valor de lst: " << logs_spawn_timer << std::endl;
+                std::cout << "el valor de timer: " << prueba << std::endl;
+*/
                 logs_spawn_timer = 0.f;
         
                 std::uniform_int_distribution<int> dist{-20, 20};

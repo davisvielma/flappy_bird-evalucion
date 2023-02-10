@@ -17,7 +17,7 @@ LogPair::LogPair(float _x, float _y, bool _move) noexcept
       top{x, y + Settings::LOG_HEIGHT, true},
       bottom{x, y + Settings::LOGS_GAP + Settings::LOG_HEIGHT, false}
 {
-
+    
 }
 
 bool LogPair::collides(const sf::FloatRect& rect) const noexcept
