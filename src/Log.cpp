@@ -61,6 +61,8 @@ void Log::update_y(float speed/*, float stop*/) noexcept {
         if(y >= (y_original + collision)) {
             approaching = false;
             y = y_original + collision;
+            Settings::sounds["wood"].play();
+
         } 
 
         if(y <= y_original) {
