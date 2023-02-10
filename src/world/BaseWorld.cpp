@@ -10,18 +10,6 @@ BaseWorld::BaseWorld(bool _generate_logs)
     last_log_y = -Settings::LOG_HEIGHT + dist(rng) + 20;
 }
 
-void BaseWorld::reset(bool _generate_logs) noexcept
-{
-    generate_logs = _generate_logs;
-
-    for (auto it = logs.begin(); it != logs.end(); )
-    {
-        auto log_pair = *it;
-        log_factory.remove(log_pair);
-        it = logs.erase(it);           
-    }
-}
-
 bool BaseWorld::collides(const sf::FloatRect& rect) const noexcept
 {
     if (rect.top + rect.height >= Settings::VIRTUAL_HEIGHT || rect.top <= 0)

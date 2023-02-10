@@ -66,6 +66,13 @@ void Settings::load_textures()
     }
 
     Settings::textures["Log"] = texture;
+
+    if (!texture.loadFromFile(Settings::GRAPHICS_PATH / "seeds.png"))
+    {
+        throw std::runtime_error{"Error loading texture graphics/seeds.png"};
+    }
+
+    Settings::textures["seeds"] = texture;
 }
 
 void Settings::load_sounds()

@@ -70,3 +70,14 @@ void NormalWorld::render(sf::RenderTarget& target) const noexcept {
 
     target.draw(ground);
 }
+
+void NormalWorld::reset(bool _generate_logs) noexcept {
+    generate_logs = _generate_logs;
+
+    for (auto it = logs.begin(); it != logs.end(); )
+    {
+        auto log_pair = *it;
+        log_factory.remove(log_pair);
+        it = logs.erase(it);           
+    }
+}

@@ -11,4 +11,5 @@ class HardWorld: public BaseWorld {
 		
 		void update(float dt) noexcept override;
 	    void render(sf::RenderTarget& target) const noexcept override;
+	    void reset(bool _generate_logs) noexcept override;
 };

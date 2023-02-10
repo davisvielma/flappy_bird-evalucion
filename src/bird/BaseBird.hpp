@@ -24,8 +24,8 @@ class BaseBird {
 	    float y;
 	    float width;
 	    float height;
-	    float vy;
 	    sf::Sprite sprite;
+	    float vy;
 	    bool jumping{false};
 	    bool move_x;
 };

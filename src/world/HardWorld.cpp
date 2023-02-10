@@ -13,14 +13,10 @@ void HardWorld::update(float dt) noexcept {
 
             std::uniform_real_distribution<float> timer{1.4, 2.0};
             logs_spawn_timer += dt;
-
-            //float prueba = timer(rng) * 1.14;
+            seeds_spawn_timer += dt;
         
-            if (logs_spawn_timer >= (timer(rng) * 1.14) /*Settings::TIME_TO_SPAWN_LOGS*/)
+            if (logs_spawn_timer >= (timer(rng) * 1.14))
             {
-                /*std::cout << "el valor de lst: " << logs_spawn_timer << std::endl;
-                std::cout << "el valor de timer: " << prueba << std::endl;
-*/
                 logs_spawn_timer = 0.f;
         
                 std::uniform_int_distribution<int> dist{-20, 20};
@@ -38,6 +34,14 @@ void HardWorld::update(float dt) noexcept {
         
                 logs.push_back(log_factory.create(Settings::VIRTUAL_WIDTH, y, move));
             }
+
+            if(seeds_spawn_timer >= 10.f) {
+                std::cout << "Cree las semillas en " << seeds_spawn_timer << std::endl;
+                seeds_spawn_timer = 0.f;
+                
+                seeds = seeds_factory.create(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT / 2 - Settings::SEEDS_SIDE / 2);
+
+            } 
         }
         
         background_x += -Settings::BACK_SCROLL_SPEED * dt;
@@ -73,6 +77,15 @@ void HardWorld::update(float dt) noexcept {
                 ++it;
             }
         }
+
+        if(seeds != nullptr) {
+            if(seeds->is_out_of_game() ) {
+                seeds_factory.remove(seeds);
+                seeds = nullptr;
+            } else {
+                seeds->update(dt);
+            }
+        }
     }
 }
 
@@ -84,5 +97,31 @@ void HardWorld::render(sf::RenderTarget& target) const noexcept {
         log_pair->render(target);
     }
 
+    if(seeds != nullptr) {
+        if(!seeds->is_out_of_game()) {
+            seeds->render(target);
+        }
+    }
+
     target.draw(ground);
+}
+
+void HardWorld::reset(bool _generate_logs) noexcept {
+    generate_logs = _generate_logs;
+
+    for (auto it = logs.begin(); it != logs.end(); )
+    {
+        auto log_pair = *it;
+        log_factory.remove(log_pair);
+        it = logs.erase(it);           
+    }
+
+    seeds_spawn_timer = 0.f;
+
+    if(seeds != nullptr) {
+        seeds_factory.remove(seeds);
+        seeds = nullptr;
+    }
+
+    std::cout << "reinicie el mundo hard" << std::endl;
 }
