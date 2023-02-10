@@ -13,8 +13,10 @@
 #include <src/states/StateMachine.hpp>
 #include <src/states/PlayingState.hpp>
 
+#include <iostream>
+
 PlayingState::PlayingState(StateMachine* sm) noexcept
-    : BaseState{sm}
+    : BaseState{sm}, power_time{Settings::POWER_TIME}
 {
 
 }
@@ -60,7 +62,13 @@ void PlayingState::update(float dt) noexcept
     bird->update(dt);
     world->update(dt);
 
-    if (world->collides(bird->get_collision_rect()))
+    if(power_time == 0) {
+        power_time = Settings::POWER_TIME;
+        bird->set_power();
+        bird->set_texture(Settings::textures["bird"]);
+    }
+
+    if (world->collides(bird->get_collision_rect(), bird->get_power()))
     {
         Settings::sounds["explosion"].play();
         Settings::sounds["hurt"].play();
@@ -74,6 +82,21 @@ void PlayingState::update(float dt) noexcept
         ++score;
         Settings::sounds["score"].play();
     }
+
+    if(world->seeds_collision(bird->get_collision_rect())) {
+        std::cout << "Colisiono el pajaro con la semilla" << std::endl;
+        bird->set_power();
+        bird->set_texture(Settings::textures["ghost"]);
+    }
+
+    if(bird->get_power()) {
+        timer += dt;
+
+        if (timer > 1.f) {
+            power_time--;
+            timer = 0;
+        }
+    }
 }
 
 void PlayingState::render(sf::RenderTarget& target) const noexcept
@@ -81,4 +104,8 @@ void PlayingState::render(sf::RenderTarget& target) const noexcept
     world->render(target);
     bird->render(target);
     render_text(target, 20, 10, "Score: " + std::to_string(score), Settings::FLAPPY_TEXT_SIZE, "flappy", sf::Color::White);
+
+    if(bird->get_power()) {
+        render_text(target, 20, 40, "Power time: " + std::to_string(power_time), Settings::MEDIUM_TEXT_SIZE, "flappy", sf::Color::White);
+    }
 }

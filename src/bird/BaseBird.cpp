@@ -17,3 +17,7 @@ void BaseBird::jump() noexcept {
         jumping = true;
     }
 }
+
+void BaseBird::set_power() noexcept {
+    power = !power;
+}

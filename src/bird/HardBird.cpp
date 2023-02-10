@@ -42,9 +42,15 @@ void HardBird::reset() noexcept {
     y = ((Settings::VIRTUAL_HEIGHT / 2) - (Settings::BIRD_HEIGHT / 2));
     vy = 0;
     vx = 0;
+    power = false;
+    set_texture(Settings::textures["bird"]);
 }
 
 void HardBird::speed_in_x(float speed) noexcept {
 	displacement = true;
 	vx = speed;
+}
+
+void HardBird::set_texture(sf::Texture &texture) noexcept {
+    sprite.setTexture(texture);
 }

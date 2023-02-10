@@ -14,11 +14,13 @@ class Seeds {
 
 
 	public:
-		Seeds(float _x/* = -Settings::SEEDS_SIDE*/, float _y/* = 0*/) noexcept;
+		Seeds(float _x, float _y) noexcept;
 
     	void update(float dt) noexcept;
 		void render(sf::RenderTarget& target) const noexcept;
 	    bool collides(const sf::FloatRect& rect) const noexcept;
 		void reset(float _x, float _y) noexcept;	
     	bool is_out_of_game() const noexcept;
+	    sf::FloatRect get_collision_rect() const noexcept;
+
 };

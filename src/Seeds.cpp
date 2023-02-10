@@ -16,13 +16,9 @@ void Seeds::render(sf::RenderTarget& target) const noexcept {
 }
 
 bool Seeds::collides(const sf::FloatRect& rect) const noexcept {
-	sf::FloatRect seeds_rec = sf::FloatRect{x, y, width, height};
+	sf::FloatRect seeds_rec = get_collision_rect();
 
-	if(seeds_rec.intersects(rect)) {
-		return true;
-	}
-
-	return false;
+	return seeds_rec.intersects(rect);
 }
 
 void Seeds::reset(float _x, float _y) noexcept {
@@ -32,4 +28,8 @@ void Seeds::reset(float _x, float _y) noexcept {
 
 bool Seeds::is_out_of_game() const noexcept {
     return x < -Settings::SEEDS_SIDE;
+}
+
+sf::FloatRect Seeds::get_collision_rect() const noexcept {
+	return sf::FloatRect{x, y, width, height};
 }

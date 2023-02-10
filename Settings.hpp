@@ -48,6 +48,8 @@ struct Settings
     static constexpr int HUGE_TEXT_SIZE{56};
     static constexpr int FLAPPY_TEXT_SIZE{28};
     static constexpr float SEEDS_SIDE{30.f};
+    static constexpr int SEEDS_TIME{10};
+    static constexpr int POWER_TIME{Settings::SEEDS_TIME / 2};
 
     static std::unordered_map<std::string, sf::Texture> textures;
     static std::unordered_map<std::string, sf::SoundBuffer> sound_buffers;

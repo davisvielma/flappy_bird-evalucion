@@ -81,3 +81,21 @@ void NormalWorld::reset(bool _generate_logs) noexcept {
         it = logs.erase(it);           
     }
 }
+
+bool NormalWorld::collides(const sf::FloatRect& rect, bool power) const noexcept
+{
+    if (rect.top + rect.height >= Settings::VIRTUAL_HEIGHT || rect.top <= 0)
+    {
+        return true;
+    }
+    
+    for (auto log_pair: logs)
+    {
+        if (log_pair->collides(rect))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}

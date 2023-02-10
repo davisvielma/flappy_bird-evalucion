@@ -32,4 +32,6 @@ private:
     std::shared_ptr<BaseBird> bird;
     std::shared_ptr<BaseWorld> world;
     int score{0};
+    float timer{0.f};
+    int power_time;
 };

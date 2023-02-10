@@ -20,8 +20,9 @@ public:
     sf::FloatRect get_collision_rect() const noexcept;
 
     void update_x(float _x) noexcept;
-    void update_y(float speed/*, float stop*/) noexcept;
+    void update_y(float speed) noexcept;
     void render(sf::RenderTarget& target) const noexcept;
+    void position_reset_y() noexcept;
 
 
 private:

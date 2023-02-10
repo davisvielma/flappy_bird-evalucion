@@ -13,7 +13,7 @@
 
 Log::Log(float _x, float _y, bool _inverted) noexcept
     : x{_x}, y{_y}, inverted{_inverted}, sprite{Settings::textures["Log"]},
-    /*x_original{_x},*/ y_original{_y}
+    y_original{_y}
 {
     if (inverted)
     {
@@ -48,7 +48,7 @@ void Log::render(sf::RenderTarget& target) const noexcept
     target.draw(sprite);
 }
 
-void Log::update_y(float speed/*, float stop*/) noexcept {
+void Log::update_y(float speed) noexcept {
     if((approaching && inverted) || (!approaching && !inverted)) {
         y += speed;
     } else{
@@ -82,4 +82,8 @@ void Log::update_y(float speed/*, float stop*/) noexcept {
     }
 
     sprite.setPosition(x, y);
+}
+
+void Log::position_reset_y() noexcept {
+    y = y_original;
 }

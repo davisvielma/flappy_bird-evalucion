@@ -73,6 +73,13 @@ void Settings::load_textures()
     }
 
     Settings::textures["seeds"] = texture;
+
+    if (!texture.loadFromFile(Settings::GRAPHICS_PATH / "ghost_bird.png"))
+    {
+        throw std::runtime_error{"Error loading texture graphics/ghost_bird.png"};
+    }
+
+    Settings::textures["ghost"] = texture;
 }
 
 void Settings::load_sounds()

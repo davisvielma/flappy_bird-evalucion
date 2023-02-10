@@ -69,11 +69,14 @@ bool LogPair::update_scored(const sf::FloatRect& rect) noexcept
     return false;
 }
 
-void LogPair::reset(float _x, float _y) noexcept
+void LogPair::reset(float _x, float _y, bool _move) noexcept
 {
     x = _x;
     y = _y;
     scored = false;
+    move = _move;
+    top.position_reset_y();
+    bottom.position_reset_y();
 }
 
 void LogPair::setMove() noexcept
