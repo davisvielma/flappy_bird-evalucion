@@ -1,0 +1,14 @@
+		Instruciones de juego
+
+1) Menu de inicio
+	Se puede cambiar de opcion con las letras W y S o con las flechas de arriba y abajo. Al elejir una opcion se inicia el juego presionando la tecla Enter.
+
+2) Personaje
+	Al iniciar el juego el personaje puede saltar presionando click izquierdo.
+	En el modo hard se puede mover el personaje hacia la derecha con las teclas A o flacha derecha y a la izquirda con la letra D o flecha izquierda.
+
+3) Modo hard
+	Al personaje obtener el super poder tiene un tiempo limitado para atravesar los troncos sin perder el juego, la cuenta regresiva del poder se encuentra en la parte superior izquierda.
+
+4) Fin del juego
+	Al perder el juego se le pregunta si seguir en el mismo modo de juego o no, al igual que en el menu de inicio se cambia de opcion con las teclas anteriormente mensionadas y luego presionando Enter.

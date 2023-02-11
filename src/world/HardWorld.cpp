@@ -14,15 +14,15 @@ void HardWorld::update(float dt) noexcept {
             logs_spawn_timer += dt;
             seeds_spawn_timer += dt;
 
-            if(seeds_spawn_timer >= Settings::SEEDS_TIME &&  logs_spawn_timer > 0.9 && logs_spawn_timer < 1.3) {
+            if(seeds_spawn_timer >= Settings::SEEDS_TIME &&  logs_spawn_timer > 1.f && logs_spawn_timer < 1.2) {
                 seeds_spawn_timer = 0.f;
 
-                std::uniform_int_distribution<int> seeds_height{-5, 5};
+                std::uniform_int_distribution<int> seeds_height{-4, 4};
 
                 seeds = seeds_factory.create(Settings::VIRTUAL_WIDTH, Settings::VIRTUAL_HEIGHT / 2 + seeds_height(rng) * 10);
             }
         
-            if (logs_spawn_timer >= (timer(rng) * 1.16))
+            if (logs_spawn_timer >= (timer(rng) * 1.14))
             {
                 logs_spawn_timer = 0.f;
         
