@@ -82,7 +82,7 @@ void NormalWorld::reset(bool _generate_logs) noexcept {
     }
 }
 
-bool NormalWorld::collides(const sf::FloatRect& rect, bool power) const noexcept
+/*bool NormalWorld::collides(const sf::FloatRect& rect, bool power) const noexcept
 {
     if (rect.top + rect.height >= Settings::VIRTUAL_HEIGHT || rect.top <= 0)
     {
@@ -98,4 +98,4 @@ bool NormalWorld::collides(const sf::FloatRect& rect, bool power) const noexcept
     }
 
     return false;
-}
+}*/

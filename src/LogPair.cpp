@@ -10,7 +10,6 @@
 
 #include <Settings.hpp>
 #include <src/LogPair.hpp>
-#include <iostream>
 
 LogPair::LogPair(float _x, float _y, bool _move) noexcept
     : x{_x}, y{_y}, move{_move}, 

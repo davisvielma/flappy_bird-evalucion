@@ -13,8 +13,6 @@
 #include <src/states/StateMachine.hpp>
 #include <src/states/PlayingState.hpp>
 
-#include <iostream>
-
 PlayingState::PlayingState(StateMachine* sm) noexcept
     : BaseState{sm}, power_time{Settings::POWER_TIME}
 {
@@ -66,6 +64,9 @@ void PlayingState::update(float dt) noexcept
         power_time = Settings::POWER_TIME;
         bird->set_power();
         bird->set_texture(Settings::textures["bird"]);
+
+        Settings::music_power.stop();
+        Settings::music.play();
     }
 
     if (world->collides(bird->get_collision_rect(), bird->get_power()))
@@ -74,7 +75,7 @@ void PlayingState::update(float dt) noexcept
         Settings::sounds["hurt"].play();
         bird->reset();
         world->reset(false);
-        state_machine->change_state("count_down", world, bird);
+        state_machine->change_state("question", world, bird);
     }
 
     if (world->update_scored(bird->get_collision_rect()))
@@ -84,9 +85,11 @@ void PlayingState::update(float dt) noexcept
     }
 
     if(world->seeds_collision(bird->get_collision_rect())) {
-        std::cout << "Colisiono el pajaro con la semilla" << std::endl;
         bird->set_power();
         bird->set_texture(Settings::textures["ghost"]);
+
+        Settings::music.pause();
+        Settings::music_power.play();
     }
 
     if(bird->get_power()) {

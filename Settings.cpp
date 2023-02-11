@@ -28,6 +28,8 @@ std::unordered_map<std::string, sf::Font> Settings::fonts{};
 
 sf::Music Settings::music{};
 
+sf::Music Settings::music_power{};
+
 void Settings::init()
 {
     Settings::load_textures();
@@ -46,9 +48,9 @@ void Settings::load_textures()
 
     Settings::textures["bird"] = texture;
 
-    if (!texture.loadFromFile(Settings::GRAPHICS_PATH / "background.redimensionado.png"))
+    if (!texture.loadFromFile(Settings::GRAPHICS_PATH / "background.png"))
     {
-        throw std::runtime_error{"Error loading texture graphics/background.redimensionado.png"};
+        throw std::runtime_error{"Error loading texture graphics/background.png"};
     }
 
     Settings::textures["background"] = texture;
@@ -140,6 +142,11 @@ void Settings::load_sounds()
     if (!Settings::music.openFromFile(Settings::SOUNDS_PATH / "marios_way.ogg"))
     {
         throw std::runtime_error{"Error loading music sounds/marios_way.ogg"};
+    }
+
+    if (!Settings::music_power.openFromFile(Settings::SOUNDS_PATH / "IntergalacticOdyssey.ogg"))
+    {
+        throw std::runtime_error{"Error loading music sounds/IntergalacticOdyssey.ogg"};
     }
 }
 

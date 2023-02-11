@@ -10,24 +10,6 @@ BaseWorld::BaseWorld(bool _generate_logs)
     last_log_y = -Settings::LOG_HEIGHT + dist(rng) + 20;
 }
 
-/*bool BaseWorld::collides(const sf::FloatRect& rect) const noexcept
-{
-    if (rect.top + rect.height >= Settings::VIRTUAL_HEIGHT || rect.top <= 0)
-    {
-        return true;
-    }
-    
-    for (auto log_pair: logs)
-    {
-        if (log_pair->collides(rect))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}*/
-
 bool BaseWorld::update_scored(const sf::FloatRect& rect) noexcept
 {
     for (auto log_pair: logs)
@@ -43,4 +25,24 @@ bool BaseWorld::update_scored(const sf::FloatRect& rect) noexcept
 
 void BaseWorld::setPause() noexcept {
     pause = !pause;
+}
+
+bool BaseWorld::collides(const sf::FloatRect& rect, bool power) const noexcept
+{
+    if (rect.top + rect.height >= Settings::VIRTUAL_HEIGHT || rect.top <= 0)
+    {
+        return true;
+    }
+    
+    if(!power) {
+        for (auto log_pair: logs)
+        {
+            if (log_pair->collides(rect))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }

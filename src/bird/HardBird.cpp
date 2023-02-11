@@ -33,10 +33,6 @@ void HardBird::update(float dt) noexcept {
     sprite.setPosition(x, y);
 }
 
-void HardBird::render(sf::RenderTarget& target) const noexcept {
-	target.draw(sprite);
-}
-
 void HardBird::reset() noexcept {
     x = ((Settings::VIRTUAL_WIDTH / 2) - (Settings::BIRD_WIDTH / 2));
     y = ((Settings::VIRTUAL_HEIGHT / 2) - (Settings::BIRD_HEIGHT / 2));

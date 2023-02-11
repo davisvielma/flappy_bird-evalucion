@@ -21,3 +21,7 @@ void BaseBird::jump() noexcept {
 void BaseBird::set_power() noexcept {
     power = !power;
 }
+
+void BaseBird::render(sf::RenderTarget& target) const noexcept {
+    target.draw(sprite);
+}

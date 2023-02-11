@@ -11,7 +11,6 @@ class HardBird : public BaseBird {
 		HardBird(float _x, float _y, float w, float h) noexcept;
 
 		void update(float dt) noexcept override;
-		void render(sf::RenderTarget& target) const noexcept override;
 		void reset() noexcept override;	
 		void speed_in_x(float speed) noexcept override;
 		void set_texture(sf::Texture &texture) noexcept override;

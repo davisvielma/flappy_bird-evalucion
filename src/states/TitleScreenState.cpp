@@ -17,8 +17,6 @@
 #include <src/world/NormalWorld.hpp>
 #include <src/world/HardWorld.hpp>
 
-#include <iostream>
-
 TitleScreenState::TitleScreenState(StateMachine* sm) noexcept
     : BaseState{sm} {
 
@@ -78,14 +76,11 @@ void TitleScreenState::handle_inputs(const sf::Event& event) noexcept
 
 void TitleScreenState::update(float dt) noexcept
 {
-   // std::shared_ptr<BaseWorld> world = world_machine.get_base_world();
     world->update(dt);
 }
 
 void TitleScreenState::render(sf::RenderTarget& target) const noexcept 
 {
-    //std::shared_ptr<BaseWorld> world = world_machine.get_base_world();
-
     world->render(target);
     render_text(target, Settings::VIRTUAL_WIDTH / 2, Settings::VIRTUAL_HEIGHT / 3, 
         "Flappy Bird", Settings::FLAPPY_TEXT_SIZE, "flappy", sf::Color::White, true);

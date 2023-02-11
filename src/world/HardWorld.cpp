@@ -1,6 +1,5 @@
 #include <src/world/HardWorld.hpp>
 #include <Settings.hpp>
-#include <iostream>
 
 HardWorld::HardWorld(bool _generate_logs) noexcept : BaseWorld{_generate_logs} {
 
@@ -16,8 +15,6 @@ void HardWorld::update(float dt) noexcept {
             seeds_spawn_timer += dt;
 
             if(seeds_spawn_timer >= Settings::SEEDS_TIME &&  logs_spawn_timer > 0.9 && logs_spawn_timer < 1.3) {
-                std::cout << "Cree las semillas en " << seeds_spawn_timer << std::endl;
-                std::cout << "Tiempo del logs spawn timer: " << logs_spawn_timer << std::endl;
                 seeds_spawn_timer = 0.f;
 
                 std::uniform_int_distribution<int> seeds_height{-5, 5};
@@ -124,11 +121,9 @@ void HardWorld::reset(bool _generate_logs) noexcept {
         seeds_factory.remove(seeds);
         seeds = nullptr;
     }
-    
-    std::cout << "reinicie el mundo hard" << std::endl;
 }
 
-bool HardWorld::collides(const sf::FloatRect& rect, bool power) const noexcept
+/*bool HardWorld::collides(const sf::FloatRect& rect, bool power) const noexcept
 {
     if (rect.top + rect.height >= Settings::VIRTUAL_HEIGHT || rect.top <= 0)
     {
@@ -146,7 +141,7 @@ bool HardWorld::collides(const sf::FloatRect& rect, bool power) const noexcept
     }
 
     return false;
-}
+}*/
 
 bool HardWorld::seeds_collision(const sf::FloatRect& rect) noexcept {
     if(seeds != nullptr) {
